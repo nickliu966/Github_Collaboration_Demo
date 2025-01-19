@@ -4,6 +4,7 @@ def add_numbers(a, b):
 
 def main():
     try:
+        print("a")
         num1 = float(input("Enter the first number: "))
         num2 = float(input("Enter the second number: "))
         result = add_numbers(num1, num2)
