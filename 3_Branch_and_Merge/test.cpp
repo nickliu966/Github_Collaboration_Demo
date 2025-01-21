@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Function to add two numbers
+// Function to add two numbers together
 int add(int a, int b) {
     return a + b;
 }
