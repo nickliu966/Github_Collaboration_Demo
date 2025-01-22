@@ -1,0 +1,56 @@
+= Git Collaboration Demo Guide (2. Fork and Pull Request)
+Author: Sam Cong
+Date: {docdate}
+:toc:
+
+== 2. Fork and Pull Request
+
+=== 2.1 Forking the Repository
+Fork my `Github_Collaboration_Demo` repository so that students can practice independently.
+
+[source,bash]
+----
+git clone https://github.com/cty20010831/Github_Collaboration_Demo.git <repo_name>
+----
+
+=== 2.2 Setting Up Local Forked Repository (Optional)
+If you choose to work with a local version of your forked repository, remember to **push and pull changes** between your local fork and the forked repository on origin.
+
+[source,bash]
+----
+git remote add upstream https://github.com/cty20010831/Github_Collaboration_Demo.git
+git fetch upstream
+git merge upstream/main
+----
+
+=== 2.3 Committing Changes in the Forked Repository
+After making changes, commit and push:
+
+[source,bash]
+----
+git add <file_name>
+git commit -m "Commit message"
+git push origin main
+----
+
+=== 2.4 Opening a Pull Request
+You can open a pull request in two ways:
+1. Click the **"Contribute"** button on GitHub.
+2. Click the **"Pull Request"** button in the repository.
+
+Both options open the pull request creation window.
+
+=== 2.5 Creating the Pull Request
+Once the pull request window is open:
+1. Provide a **clear description** of the changes made.
+2. Select the appropriate **base and compare branches**.
+3. Click **"Create Pull Request"**.
+
+=== 2.6 Awaiting Response from the Repository Owner
+Once submitted, the repository owner will review the request and either **accept** or **decline** it.
+
+****
+⚠ **Please do not actually send me the pull request!** This is just for practice.
+****
+
+---

@@ -1,4 +1,4 @@
-= Git Collaboration Demo Guide
+= Git Collaboration Demo Guide (1. Only Pull and Push)
 Author: Sam Cong
 Date: {docdate}
 :toc:
