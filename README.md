@@ -139,3 +139,7 @@ Each method has its **use case**, but for most structured development projects, 
 I understand that using git and github for team collaboration may become challenging (and irritating 😑) at first, especially when you are trying as hard as you can to understand piles of unfamiliar git commands and those annoying "merge conflicts" error messages. This is in fact totally normal! It also applies to me when I started to learn these topics and apply them in my own group projects (and even today to be honest 😂). 
 
 Hence, I have gathered a bunch of learning resources that could hopefully make our Git experience less overwhelming. These include both basic and intermediate-level materials that can serve as a refresher and aid in consolidation, as well as more advanced resources that could deepen understanding and provide hands-on challenges. 
+
+## To DO
+1. Add table of resources.
+2. Add `adoc` file (and also practice the demo) for branch and merge.
