@@ -6,6 +6,7 @@ This repository serves as the in-class demo repository for Lab 3 of UChicago MAC
     ├── 1_Clone_and_Push            # Directory containing test code for Only Push and Pull      
     ├── 2_Fork_and_Pull_Request     # Directory containing test code for Fork and Pull_Request
     ├── 3_Branch_and_Merge          # Directory containing test code for Branch and Merge
+    ├── Demo_Steps                  # Directory outlining steps of code implementation during in-class demo
     ├── Lab_Slides.pptx             # Powerpoint for the lab
 
 ## Different Ways of Collborating Using Git and Github
