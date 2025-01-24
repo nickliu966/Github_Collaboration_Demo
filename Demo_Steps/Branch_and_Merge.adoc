@@ -9,12 +9,13 @@ Date: {docdate}
 Two feature branches, `feature_1` and `feature_2`, will be created—one directly on GitHub and one locally.
 
 ==== 3.1.1 Creating Branches on GitHub
-Fetch all new branches from GitHub:
+You can fetch all new branches from GitHub:
 [source,bash]
 ----
 git fetch origin
 ----
-Create and track the remote branch locally:
+
+You can also create and track each remote branch locally (but do remember to fetch all branches in the end):
 [source,bash]
 ----
 git checkout -b feature_1 origin/feature_1
@@ -28,30 +29,38 @@ git checkout -b feature_2
 
 git push origin feature_2
 ----
-To avoid manually pushing `feature_2` after creation, use:
+
+Note: to avoid manually pushing `feature_2` after creation, you can use:
 [source,bash]
 ----
 git push --set-upstream origin feature_2
 ----
 
 === 3.2 Demonstrating a No-Conflict Merge
-Each branch will create a unique file and merge to `main`.
+Each branch will create a unique file (with no conflicts by design) and merge to `main`.
 
 ==== 3.2.1 Adding New Files
 - `feature_1` branch: Add a file named `feature_1.txt`
 - `feature_2` branch: Add a file named `feature_2.txt`
 
-==== 3.2.2 Using Feature Branch Workflow (Recommended)
-Use GitHub pull requests to merge changes and resolve conflicts:
+==== 3.2.2 Using GitHub Pull Requests (PRs) to Merge Changes (Recommended)
+You commit the change in each local branch and then push them to their respective origin branch.  
 [source,bash]
 ----
 git push origin feature_1
 ----
 
-==== 3.2.3 Merging Changes Locally (Not Recommended)
-Commit changes on the local branch.
+[source,bash]
+----
+git push origin feature_2
+----
 
-Switch to `main` and merge:
+After this, all you need to do is to solve **on GitHub** by creating and acting on PRs. 
+
+==== 3.2.3 Merging Changes onto Local Main Branch (Not Recommended)
+You first commit the changes on local branch (do not push it to origin!). 
+
+You then switch to main branch and try to merge the branch to main branch. 
 [source,bash]
 ----
 git checkout main
@@ -59,47 +68,47 @@ git checkout main
 git merge feature_1
 ----
 
-Push to origin:
+[source,bash]
+----
+git checkout main
+
+git merge feature_2
+----
+
+When there are no merge conflicts, you will not be thrown error (merge conflicts) messages. 
+
+Next, you push to origin:
 [source,bash]
 ----
 git push origin main
 ----
 
 === 3.3 Demonstrating Merge Conflicts
-Both branches modify the same part of `test.cpp` (line 4 under "// Function to add two numbers").
+Both branches modify the same part of `test.cpp` differently (e.g., line 4 under "// Function to add two numbers").
 
-==== 3.3.1 Handling Conflicts via GitHub (Recommended)
-- Submit PRs for both branches.
-- Resolve conflicts using GitHub’s UI.
+==== 3.3.1 Using GitHub Pull Requests (PRs) to Merge Changes (Recommended)
+Basically, you will be doing the same thing as there is no merge conflicts. The only difference here is that compared to the case when there is no merge conflicts, you will receive a merge conflict warning message when you deal with the second pull request (the order does not matter). You can now solve the merge conflict on Github (sharing the same principles of solving merge conflicts as you do locally).
 
-==== 3.3.2 Handling Conflicts Locally (Not Recommended)
-Commit changes locally.
+==== 3.3.2 Merging Changes onto Local Main Branch (Not Recommended)
+Basically, you will be doing the same thing as there is no merge conflicts. In this case, however, there will be merge conflicts that need to be resolved when both branches are merged to the main branch (more specifically, when you try to merge the second branch to `main` after you have merged the first branch to `main`.)
 
-Merge in `main`:
-[source,bash]
-----
-git checkout main
-git merge feature_1
-----
-
-Identify conflicts using:
-[source,bash]
-----
-git diff feature_1 feature_2
-----
-
-Resolve and push changes:
+After the conflict resolver pops up, all you need to do is resolve conflicts. After that, simply push changes to origin:
 [source,bash]
 ----
 git push origin main
 ----
 
-==== 3.3.3 Alternative: Using Rebase Instead of Merge
+Note: actually you could in principle identify conflicts beforehead using:
+[source,bash]
+----
+git diff <branch_name> <branch_name> <branch_name> # however number of branches you want
+----
+
+Optional: An alternative to this is using a **rebase workflow** instead of merging: 
 [source,bash]
 ----
 git checkout feature_1
-
-git rebase main
+git rebase main # This forces feature_1 to be updated before merging
 ----
 
 === 3.4 Deleting Branches (Optional)
@@ -112,18 +121,15 @@ git push origin --delete feature_1
 ----
 
 ==== 3.4.2 Deleting on GitHub First
+After you have deleted branches on github, you can use:
 [source,bash]
 ----
 git fetch --prune
 ----
 
 === 3.5 Understanding Three-Way Merge (Optional)
-Modify `test.cpp` on both `main` and `feature_1`.
+We will again add different comments under the comment "// Function to add two numbers" in line 4 of `test.cpp`` (feel free to add different stuff) for main and feature_1 branches.
 
-Commit changes and merge:
-[source,bash]
-----
-git merge feature_1
-----
+When you commit the change in main branch and then commit the change in feature_1 branch, and then try to merge feature_1 to main (i.e., `git merge feature_1` on main branch), you will get a three-way merge. 
 
-Even without conflicts, Git will create a merge commit. Test both conflict and non-conflict cases!
+Even if there are no merge conflicts, Git will still perform a three-way merge and create a merge commit. Feel free to test that out (when there are no conflicts and when there are)!
