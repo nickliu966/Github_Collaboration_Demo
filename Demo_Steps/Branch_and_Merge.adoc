@@ -1,0 +1,129 @@
+= Git Collaboration Demo Guide (3. Branch and Merge)
+Author: Sam Cong
+Date: {docdate}
+:toc:
+
+== 3. Branch and Merge
+
+=== 3.1 Creating Feature Branches
+Two feature branches, `feature_1` and `feature_2`, will be created—one directly on GitHub and one locally.
+
+==== 3.1.1 Creating Branches on GitHub
+Fetch all new branches from GitHub:
+[source,bash]
+----
+git fetch origin
+----
+Create and track the remote branch locally:
+[source,bash]
+----
+git checkout -b feature_1 origin/feature_1
+----
+
+==== 3.1.2 Creating Branches Locally
+Create and push a local branch:
+[source,bash]
+----
+git checkout -b feature_2
+
+git push origin feature_2
+----
+To avoid manually pushing `feature_2` after creation, use:
+[source,bash]
+----
+git push --set-upstream origin feature_2
+----
+
+=== 3.2 Demonstrating a No-Conflict Merge
+Each branch will create a unique file and merge to `main`.
+
+==== 3.2.1 Adding New Files
+- `feature_1` branch: Add a file named `feature_1.txt`
+- `feature_2` branch: Add a file named `feature_2.txt`
+
+==== 3.2.2 Using Feature Branch Workflow (Recommended)
+Use GitHub pull requests to merge changes and resolve conflicts:
+[source,bash]
+----
+git push origin feature_1
+----
+
+==== 3.2.3 Merging Changes Locally (Not Recommended)
+Commit changes on the local branch.
+
+Switch to `main` and merge:
+[source,bash]
+----
+git checkout main
+
+git merge feature_1
+----
+
+Push to origin:
+[source,bash]
+----
+git push origin main
+----
+
+=== 3.3 Demonstrating Merge Conflicts
+Both branches modify the same part of `test.cpp` (line 4 under "// Function to add two numbers").
+
+==== 3.3.1 Handling Conflicts via GitHub (Recommended)
+- Submit PRs for both branches.
+- Resolve conflicts using GitHub’s UI.
+
+==== 3.3.2 Handling Conflicts Locally (Not Recommended)
+Commit changes locally.
+
+Merge in `main`:
+[source,bash]
+----
+git checkout main
+git merge feature_1
+----
+
+Identify conflicts using:
+[source,bash]
+----
+git diff feature_1 feature_2
+----
+
+Resolve and push changes:
+[source,bash]
+----
+git push origin main
+----
+
+==== 3.3.3 Alternative: Using Rebase Instead of Merge
+[source,bash]
+----
+git checkout feature_1
+
+git rebase main
+----
+
+=== 3.4 Deleting Branches (Optional)
+==== 3.4.1 Deleting Locally First
+[source,bash]
+----
+git branch -d feature_1
+
+git push origin --delete feature_1
+----
+
+==== 3.4.2 Deleting on GitHub First
+[source,bash]
+----
+git fetch --prune
+----
+
+=== 3.5 Understanding Three-Way Merge (Optional)
+Modify `test.cpp` on both `main` and `feature_1`.
+
+Commit changes and merge:
+[source,bash]
+----
+git merge feature_1
+----
+
+Even without conflicts, Git will create a merge commit. Test both conflict and non-conflict cases!
